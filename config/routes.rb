@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :authors do
     post 'new_author'
     get 'author_books'
+    post 'add_book'
     end
   resources :books do
     post 'new_book'
