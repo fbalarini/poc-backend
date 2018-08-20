@@ -1,5 +1,5 @@
 class AuthorController < ApplicationController
-    def create
+    def new
     end
     def destroy
     end

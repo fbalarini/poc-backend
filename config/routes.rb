@@ -4,10 +4,12 @@ Rails.application.routes.draw do
     post 'new'
     get 'books'
     post 'add_book'
+    delete 'destroy'
     end
   resources :books do
     post 'new'
     get 'book_pages'
     get 'book_publishDate'
+    delete 'destroy'
   end
 end
