@@ -29,8 +29,4 @@ Metrics/ClassLength:
 
 # Disables "Missing top-level class documentation comment" warning
 Documentation:
-<<<<<<< HEAD
   Enabled: false
-=======
-  Enabled: false
->>>>>>> general fixes
