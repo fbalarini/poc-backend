@@ -5,10 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-<<<<<<< HEAD
 
 author = Author.create({name: "Juan"})
 author3 = Author.create({name: "Nando"})
-author3.books.create({name: "El primero", content: "asdfsjdfksjdnvksjfjnsdfkjsdnfsdnfjksdnfkasd"})
-=======
->>>>>>> develop
+author3.books.create({name: "El libro de Nando", content: "asdfsjdfksjdnvksjfjnsdfkjsdnfsdnfjksdnfkasd"})
+author.books.create({name: "El libro de Juan", content: "asdfsjdfksjdnvksjfjnsdfkjsdnfsdnfjksdnfkasd"})
