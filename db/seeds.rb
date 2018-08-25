@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+unless Author.count.positive?
+  Author.create(name: 'Arturo', country: 'Uruguay', birthDate: Time.current)
+  Author.create(name: 'Federico', country: 'Uruguay', birthDate: Time.current)
+end
+
+unless Book.count.positive?
+  Book.create(name: 'Futbol', author: Author.first)
+  Book.create(name: 'Rugby', author: Author.first)
+  Book.create(name: 'Basket', author: Author.second)
+  Book.create(name: 'Hockey', author: Author.second)
+end

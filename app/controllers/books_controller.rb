@@ -1,28 +1,41 @@
 class BooksController < ApplicationController
+    def index
+        render json: Book.all
+    end
+
     def create
         book = Book.new(book_params)
         if book.save
-            render json: {
-                status: 200,
-                message: "Successfully created new book."
-            }.to_json
-        else:
-            render json: {
-                status: 500,
-                message: "Internal issues, try later."
-            }.to_json
+            render json: book
+        else
+            render json: book.errors, status: 400
         end
     end
+
     def show
-        book = Book.find(params[:id])
+        render json: book_by_id
     end
+
     def destroy
-        book.find(params[:id]).destroy
+        book_by_id.destroy
+        head :ok
+    end
+
+    def update
+        if book_by_id.update_attributes(book_params)
+            head :ok
+        else
+            render json: book.errors, status: 400
     end
 
     private
 
-    def book_params
-        params.require(:).permit
+    def book_by_id
+        @book_by_id ||= Book.find(params[:id])
     end
+
+    def book_params
+        params.require(:book).permit(:name, :author_id)
+    end
+
 end

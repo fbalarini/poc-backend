@@ -1,39 +1,45 @@
-class AuthorsController < ApplicationController
+    class AuthorsController < ApplicationController
+
+    def index
+        render json: Author.all
+    end
+
     def create
         author = Author.new(author_params)
         if author.save
-            render json: {
-                status: 200,
-                message: "Successfully created new author."
-            }.to_json
-        else:
-            render json: {
-                status: 500,
-                message: "Internal issues, try later."
-            }.to_json
+            render json: author
+        else
+            render json: author.errors, status: 400
         end
     end
-    def show
-        author = Author.find(params[:id])
-    end
-    def destroy
-        author.find(params[:id]).destroy
-    end
-    def show_books:
-        author = Author.find(params[:id])
-        authors_books = "author.books"
-        render json: {
-            status: 200,
-            message: authors_books
-        }.to_json
-    end
-    def add_book:
 
+    def show
+        render json: author_by_id
+    end
+
+    def destroy
+        author_by_id.destroy
+        head :ok # 200 OK
+    end
+
+    def show_books
+        render json: Author.find(params[:author_id]).books
+    end
+
+    def update
+        if author_by_id.update_attributes(author_params)
+            head :ok
+        else
+            render json: author.errors, status: 400
+    end
 
     private
 
-    def author_params
-        params.require(:).permit
+    def author_by_id
+        @author_by_id ||= Author.find(params[:id]) # if variable is not null, load it with that value
     end
 
-end
+    def author_params
+        params.require(:author).permit(:name, :country, :birthDate)
+    end
+    end
