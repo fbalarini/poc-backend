@@ -8,6 +8,35 @@ class BooksController < ApplicationController
     end
   end
 
+  def create
+    if !author_by_id.nil?
+      book = Book.new(book_params)
+      book[:author_id] = params[:author_id]
+      if book.save
+        render json: book
+      else
+        render json: {status: "error", code: 3000, message: "Cannot create book"}
+      end
+    else
+      render json: {status: "error", code: 3000, message: "Author doesnt exist"}
+    end
+  end
+
+  def show
+    if author_by_id.nil?
+      render json: {status: "error", code: 3000, message: "Author doesnt exist"}
+      return
+    end
+    if book_by_id.nil?
+      render json: {status: "error", code: 3000, message: "Book doesnt exist"}
+      return
+    end
+    if book_by_id.author != author_by_id
+      render json: {status: "error", code: 3000, message: "The book doesnt belong to that author"}
+      return
+    end
+    render json: book_by_id
+  end
 
   private
 
@@ -18,5 +47,18 @@ class BooksController < ApplicationController
       nil
     end
   end
+
+  def book_by_id
+    if Book.exists?(params[:id])
+      @book_by_id ||= Book.find(params[:id])
+    else
+      nil
+    end
+  end
+
+  def book_params
+    params.require(:book).permit(:name,:pages)
+  end
+
 
 end
