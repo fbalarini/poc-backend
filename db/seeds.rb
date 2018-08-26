@@ -17,3 +17,4 @@ unless Book.count.positive?
   Book.create(name: 'Basket', author: Author.second)
   Book.create(name: 'Hockey', author: Author.second)
 end
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
