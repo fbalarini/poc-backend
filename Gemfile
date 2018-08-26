@@ -12,6 +12,7 @@ gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.0'
 gem 'redis', '~> 4.0'
 gem 'jbuilder', '~> 2.5'
+gem 'figaro'
 
 
 group :development, :test do
