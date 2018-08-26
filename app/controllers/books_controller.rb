@@ -42,6 +42,18 @@ class BooksController < ApplicationController
     end
   end
 
+  def destroy
+    if check_params
+      return
+    end
+    book = book_by_id
+    if book.destroy
+      render json: {status: "OK", code: 200, message: "Book deleted"}
+    else
+      render json: {status: "error", code: 3000, message: "Cannot destroy book"}
+    end
+  end
+
   private
 
   def author_by_id
