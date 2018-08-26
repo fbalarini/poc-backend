@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   resources :authors do
     resources :books
   end
+  get '/all_books', to: 'books#all_books'
 end

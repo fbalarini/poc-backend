@@ -54,6 +54,11 @@ class BooksController < ApplicationController
     end
   end
 
+
+  def all_books
+    render json: Book.all
+  end
+
   private
 
   def author_by_id
