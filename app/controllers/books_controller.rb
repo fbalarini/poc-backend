@@ -23,19 +23,23 @@ class BooksController < ApplicationController
   end
 
   def show
-    if author_by_id.nil?
-      render json: {status: "error", code: 3000, message: "Author doesnt exist"}
-      return
-    end
-    if book_by_id.nil?
-      render json: {status: "error", code: 3000, message: "Book doesnt exist"}
-      return
-    end
-    if book_by_id.author != author_by_id
-      render json: {status: "error", code: 3000, message: "The book doesnt belong to that author"}
+    if check_params
       return
     end
     render json: book_by_id
+  end
+
+  def update
+    if check_params
+      return
+    end
+    book = book_by_id
+    book.attributes = book_params
+    if book.save
+      render json: book
+    else
+      render json: {status: "error", code: 3000, message: "Cannot update book"}
+    end
   end
 
   private
@@ -60,5 +64,28 @@ class BooksController < ApplicationController
     params.require(:book).permit(:name,:pages)
   end
 
+  def author_exists
+    !author_by_id.nil?
+  end
+
+  def book_exists
+    !book_by_id.nil?
+  end
+
+  def check_params
+    if !author_exists
+      render json: {status: "error", code: 3000, message: "Author doesnt exist"}
+      return true
+    end
+    if !book_exists
+      render json: {status: "error", code: 3000, message: "Book doesnt exist"}
+      return true
+    end
+    if book_by_id.author != author_by_id
+      render json: {status: "error", code: 3000, message: "The book doesnt belong to that author"}
+      return true
+    end
+    false
+  end
 
 end
