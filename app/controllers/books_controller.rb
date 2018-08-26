@@ -1,4 +1,4 @@
-class BooksController < ApplicationController
+class BooksController < ApiControllerController
     def index
         render json: Book.all
     end
