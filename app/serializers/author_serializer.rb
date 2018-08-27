@@ -3,11 +3,7 @@ class AuthorSerializer < ActiveModel::Serializer
     #has_many :books
 
     def book_names
-        res = []
-        object.books.each do |book|
-            res.push(book.name)
-        end
-        res
+        object.books.pluck(:name)
     end
 
   end
