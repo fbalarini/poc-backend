@@ -23,13 +23,12 @@ class AuthorsController < ApplicationController
   end
 
   def update
-    author = author_by_id
-    if author.nil?
+    if author_by_id.nil?
       render json: {status: "error", code: 3000, message: "Author doesnt exists"}
     else
-      author.attributes = authors_params
-      if author.save
-        render json: author
+      author_by_id.attributes = authors_params
+      if author_by_id.save
+        render json: author_by_id
       else
         render json: {status: "error", code: 3000, message: "Cannot update author"}
       end
@@ -37,11 +36,10 @@ class AuthorsController < ApplicationController
   end
 
   def destroy
-    author = author_by_id
-    if author.nil?
+    if author_by_id.nil?
       render json: {status: "error", code: 3000, message: "Author doesnt exists"}
     else
-      if author.destroy
+      if author_by_id.destroy
         render json: {status: "OK", code: 200, message: "Author deleted"}
       else
         render json: {status: "error", code: 3000, message: "Cannot destroy author"}
