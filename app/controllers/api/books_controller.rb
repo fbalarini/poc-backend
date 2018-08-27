@@ -14,7 +14,7 @@ class Api::BooksController < ApplicationController
             render json: @book.errors, status: 400
         end
     end
-
+    #Comment new
     # GET /api/books/:id
     def show
         render json: Book.find(params[:id])
