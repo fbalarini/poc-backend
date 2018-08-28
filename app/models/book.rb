@@ -1,4 +1,4 @@
 class Book < ApplicationRecord
-    belongs_to :author
-    validates :name , presence: true
+  belongs_to :author
+  validates :name, :author, presence: true
 end
