@@ -14,6 +14,7 @@ gem 'pg', '1.0.0'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.0'
 gem 'redis', '~> 4.0'
+gem 'therubyracer', '0.12.3'
 
 group :development, :test do
   gem 'byebug', '10.0.2'
