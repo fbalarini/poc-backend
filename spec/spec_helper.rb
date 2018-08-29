@@ -93,4 +93,13 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+def serialize_author(author)
+  ActiveModelSerializers::Adapter.create(AuthorSerializer.new(author)) 
+end
+
+def serialize_authors(authors)
+  authors.collect { |a| serialize_author(a) } 
+end
+
 end
