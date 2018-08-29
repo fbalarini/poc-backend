@@ -1,5 +1,5 @@
 # Change these
-server '18.188.53.186', port: 3004, roles: [:web, :app, :db], primary: true
+server '18.188.53.186', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:fbalarini/poc-backend.git'
 set :application,     'poc-backend'
@@ -25,7 +25,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 
 ## Defaults:
 # set :scm,           :git
-# set :branch,        :master
+set :branch,        :develop
 # set :format,        :pretty
 # set :log_level,     :debug
 # set :keep_releases, 5
