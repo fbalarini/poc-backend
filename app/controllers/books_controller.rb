@@ -14,18 +14,10 @@ class BooksController < ApplicationController
   end
 
   def show
-    if book_belongs_to_author
-      render json: book_by_id
-    else
-      render json: {status: "error", code: 3000, message: "The book doesnt belong to that author"}
-    end
+    render json: book_by_id
   end
 
   def update
-    unless book_belongs_to_author
-      render json: {status: "error", code: 3000, message: "The book doesnt belong to that author"}
-      return
-    end
     book_by_id.attributes = book_params
     if book_by_id.save
       render json: book_by_id
@@ -35,10 +27,6 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    unless book_belongs_to_author
-      render json: {status: "error", code: 3000, message: "The book doesnt belong to that author"}
-      return
-    end
     book_by_id.destroy
     head :ok
   end
@@ -55,15 +43,11 @@ class BooksController < ApplicationController
   end
 
   def book_by_id
-    @book_by_id ||= Book.find(params[:id])
+    @book_by_id ||= author_by_id.books.find(params[:id])
   end
 
   def book_params
     params.require(:book).permit(:name,:pages)
-  end
-
-  def book_belongs_to_author
-    book_by_id.author == author_by_id
   end
 
 end
