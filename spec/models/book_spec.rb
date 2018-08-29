@@ -10,26 +10,8 @@ RSpec.describe Book, type: :model do
     end
 
     it 'should not let create new ones, without existing author' do
-      book = Book.create(
-        name: 'The adventures of Tintin',
-        pages: '150',
-        publishDate: '2000-05-14'
-      )
-      expect(book.valid?). to be false
-    end
-
-    it 'should not let create new ones, with date after their author birth date' do
-      author = Author.create(
-        name: 'John',
-        country: 'USA',
-        birthDate: '1992-05-14'
-      )
-      book = Book.create(
-        name: 'The adventures of Tintin',
-        pages: '150',
-        publishDate: '1991-05-14'
-      )
-      expect(book.valid?). to be false
+      book.author = nil
+      expect(book).not_to be_valid
     end
   end
 end
