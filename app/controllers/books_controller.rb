@@ -5,8 +5,7 @@ class BooksController < ApplicationController
   end
 
   def create
-    book = Book.new(book_params)
-    book[:author_id] = params[:author_id]
+    book = Book.new(book_params.merge(author_id: params[:author_id]))
     if book.save
       render json: book
     else
