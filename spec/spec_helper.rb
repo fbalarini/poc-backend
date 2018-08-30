@@ -102,4 +102,12 @@ def serialize_authors(authors)
   authors.collect { |a| serialize_author(a) } 
 end
 
+def serialize_book(book)
+  ActiveModelSerializers::Adapter.create(BookSerializer.new(book)) 
+end
+
+def serialize_books(books)
+  books.collect { |b| serialize_book(b) } 
+end
+
 end
