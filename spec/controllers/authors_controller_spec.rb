@@ -38,7 +38,6 @@ RSpec.describe AuthorsController, type: :controller do
     end
 
     it "response with JSON body containing expected Authors" do
-      byebug
       expect(hash_body).to match(subject)
     end
   end
