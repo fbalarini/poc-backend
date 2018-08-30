@@ -4,7 +4,6 @@ require 'rails_helper'
 RSpec.describe AuthorsController, type: :controller do
 
   before(:each) do
-    #@author_list = create_list(:author, 3)
     @authors_with_books = create_list(:author_with_books, 3)
   end
 
@@ -25,6 +24,7 @@ RSpec.describe AuthorsController, type: :controller do
       expect(hash_body).to match(subject)
     end
   end
+
   describe "GET #index" do
     before do
       get :index
@@ -42,4 +42,39 @@ RSpec.describe AuthorsController, type: :controller do
     end
   end
 
+  describe "POST #create" do
+    before do
+      @new_author = build(:author)
+      post :create, params: {author: @new_author.attributes}
+    end
+
+    let(:subject) { JSON.parse(serialize_author(Author.find_by name: @new_author.name).to_json) }
+    let(:hash_body) { JSON.parse(response.body) }
+    
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it "response with JSON body containing recently created Author" do
+      expect(hash_body).to match(subject)
+    end
+  end
+
+  describe "DELETE #destroy" do
+    before do
+      @id_to_destroy = @authors_with_books.first.id
+      delete :destroy, params: {id: @id_to_destroy }
+    end
+
+    let(:hash_body) { JSON.parse(response.body) }
+
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it "destroys de desired element" do
+      expect{ Author.find(@id_to_destroy) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+  end
 end
