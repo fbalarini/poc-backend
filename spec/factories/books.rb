@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :book do
-    name "MyString"
-    pages 1
-    author "MyString"
+    author
+    pages 500
+    sequence(:name) { |k| "Book#{k} of #{author.name}" } # Unique name for every author
   end
 end
