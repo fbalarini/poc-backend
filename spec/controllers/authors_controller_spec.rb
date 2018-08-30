@@ -66,13 +66,11 @@ RSpec.describe AuthorsController, type: :controller do
       delete :destroy, params: {id: @id_to_destroy }
     end
 
-    let(:hash_body) { JSON.parse(response.body) }
-
     it "returns http success" do
       expect(response).to have_http_status(:success)
     end
 
-    it "destroys de desired element" do
+    it "destroys de desired author" do
       expect{ Author.find(@id_to_destroy) }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
