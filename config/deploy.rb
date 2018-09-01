@@ -1,5 +1,5 @@
 # Change these
-server '18.188.53.186', port: 22, roles: [:web, :app, :db], primary: true
+server '34.213.11.120', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:fbalarini/poc-backend.git'
 set :application,     'poc-backend'
