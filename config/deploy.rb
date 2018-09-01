@@ -1,7 +1,7 @@
 # Change these
 server '18.188.53.186', port: 22, roles: [:web, :app, :db], primary: true
 
-set :repo_url,        'git@github.com:fbalarini/poc-backend.git'
+set :repo_url,        'https://frabago:nando24@github.com/fbalarini/poc-backend.git'
 set :application,     'poc-backend'
 set :user,            'ubuntu'
 set :puma_threads,    [4, 16]
@@ -11,7 +11,7 @@ set :puma_workers,    0
 set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
-set :deploy_via,      :remote_cache
+#set :deploy_via,      :remote_cache
 set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
@@ -29,6 +29,8 @@ set :branch,        :develop
 # set :format,        :pretty
 # set :log_level,     :debug
 # set :keep_releases, 5
+#set :git_http_username, "user"
+#set :git_http_password, "password"
 
 ## Linked Files & Directories (Default None):
 # set :linked_files, %w{config/database.yml}
