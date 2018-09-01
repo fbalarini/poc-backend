@@ -40,5 +40,4 @@ test:
 production:
   <<: *default
   database: poc_backend_production
-  username: poc
-  password: <%= ENV['POC_BACKEND_DATABASE_PASSWORD'] %>
+
