@@ -97,7 +97,7 @@ jobs:
       - run:
           name: Deploy Develop to AWS
           command: |
-            cap production deploy BRANCH_TO_DEPLOY=develop
+            bundle exec cap production deploy BRANCH_TO_DEPLOY=develop
 
   deploy-production:
     machine:
