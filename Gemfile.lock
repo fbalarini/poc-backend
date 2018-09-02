@@ -304,6 +304,7 @@ DEPENDENCIES
   capistrano-rvm
   capistrano3-puma
   devise (~> 4.5.0)
+  dotenv (= 2.5.0)
   dotenv-rails (= 2.5.0)
   execjs (= 2.7.0)
   factory_bot_rails (= 4.10.0)

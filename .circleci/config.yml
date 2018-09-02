@@ -97,6 +97,7 @@ jobs:
       - run:
           name: Deploy Staging to AWS
           command: |
+            cap production deploy BRANCH_TO_DEPLOY=develop
 
   deploy-production:
     machine:
