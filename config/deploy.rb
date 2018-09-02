@@ -1,9 +1,9 @@
 # Change these
-server '18.188.53.186', port: 22, roles: [:web, :app, :db], primary: true
+server ENV['EC2_IP'], port: ENV['EC2_PORT'], roles: [:web, :app, :db], primary: true
 
-set :repo_url,        'https://frabago:nando24@github.com/fbalarini/poc-backend.git'
-set :application,     'poc-backend'
-set :user,            'ubuntu'
+set :repo_url,        ENV['REPO_URL']
+set :application,     ENV['APP_NAME']
+set :user,            ENV['EC2_USER']
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
 
@@ -25,7 +25,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 
 ## Defaults:
 # set :scm,           :git
-set :branch,        :develop
+set :branch,        ENV['BRANCH_TO_DEPLOY'].to_sym
 # set :format,        :pretty
 # set :log_level,     :debug
 # set :keep_releases, 5
@@ -52,8 +52,8 @@ namespace :deploy do
   desc "Make sure local git is in sync with remote."
   task :check_revision do
     on roles(:app) do
-      unless `git rev-parse HEAD` == `git rev-parse origin/develop`
-        puts "WARNING: HEAD is not the same as origin/develop"
+      unless `git rev-parse HEAD` == `git rev-parse origin/#{ENV['BRANCH_TO_DEPLOY']}`
+        puts "WARNING: HEAD is not the same as origin/#{ENV['BRANCH_TO_DEPLOY']}"
         puts "Run `git push` to sync changes."
         exit
       end
