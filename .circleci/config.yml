@@ -89,13 +89,13 @@ jobs:
           name: run rubocop linter
           command: bundle exec rubocop
 
-  deploy-staging:
+  deploy-develop:
     machine:
       enabled: true
     steps:
       - checkout
       - run:
-          name: Deploy Staging to AWS
+          name: Deploy Develop to AWS
           command: |
             cap production deploy BRANCH_TO_DEPLOY=develop
 
