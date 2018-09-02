@@ -90,8 +90,16 @@ jobs:
           command: bundle exec rubocop
 
   deploy-develop:
-    machine:
-      enabled: true
+    working_directory: ~/poc-backend
+    docker:
+      # specify the version you desire here
+      - image: circleci/ruby:2.5.1-browsers
+        environment:
+          PGHOST: localhost
+          PGUSER: poc-backend
+          RAILS_ENV: test
+          RACK_ENV: test
+
     steps:
       - checkout
 
