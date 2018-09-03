@@ -90,10 +90,14 @@ jobs:
           command: bundle exec rubocop
 
   deploy-develop:
-    machine:
-      enabled: true
+    working_directory: ~/poc-backend
+    docker:
+      - image: circleci/ruby:2.5.1-browsers
     steps:
       - checkout
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
       - run:
           name: Deploy Develop to AWS
           command: |
