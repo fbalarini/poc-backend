@@ -93,22 +93,38 @@ jobs:
     working_directory: ~/poc-backend
     docker:
       - image: circleci/ruby:2.5.1-browsers
+
     steps:
       - checkout
+
       - add_ssh_keys
+
       - run:
           name: Bundle Install
           command: bundle check || bundle install
+
       - run:
           name: Deploy Develop to AWS
           command: |
             eval `ssh-agent` && ssh-add ~/.ssh/id_rsa* && bundle exec cap production deploy BRANCH_TO_DEPLOY=develop
 
   deploy-production:
-    machine:
-      enabled: true
+    working_directory: ~/poc-backend
+    docker:
+      - image: circleci/ruby:2.5.1-browsers
+
     steps:
       - checkout
+
+      - add_ssh_keys
+
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+
+    steps:
+      - checkout
+
       - run:
           name: Deploy Production to AWS
           command: |
