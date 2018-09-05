@@ -106,7 +106,7 @@ jobs:
       - run:
           name: Deploy Develop to AWS
           command: |
-            eval `ssh-agent` && ssh-add ~/.ssh/id_rsa* && bundle exec cap production deploy BRANCH_TO_DEPLOY=develop
+            eval `ssh-agent` && ssh-add ~/.ssh/id_rsa* && bundle exec cap staging deploy
 
   deploy-production:
     working_directory: ~/poc-backend
@@ -128,3 +128,4 @@ jobs:
       - run:
           name: Deploy Production to AWS
           command: |
+            eval `ssh-agent` && ssh-add ~/.ssh/id_rsa* && bundle exec cap production deploy
