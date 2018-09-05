@@ -59,3 +59,7 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
+
+server ENV.fetch('EC2_IP_PRODUCTION'), port: ENV.fetch('EC2_IP_PRODUCTION'), roles: [:web, :app, :db], primary: true
+
+set :branch, :production

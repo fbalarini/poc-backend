@@ -8,7 +8,6 @@ gem 'activeadmin', '~>1.3.1'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise', '~> 4.5.0'
-gem 'dotenv', '2.5.0'
 gem 'execjs', '2.7.0'
 gem 'foreman', '0.85.0'
 gem 'pg', '1.0.0'
