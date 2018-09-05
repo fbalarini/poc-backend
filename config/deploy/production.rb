@@ -60,6 +60,6 @@
 #     # password: "please use keys"
 #   }
 
-server ENV.fetch('EC2_IP_PRODUCTION'), port: ENV.fetch('EC2_IP_PRODUCTION'), roles: [:web, :app, :db], primary: true
+server ENV.fetch('EC2_IP_PRODUCTION'), port: ENV.fetch('EC2_PORT_PRODUCTION'), roles: [:web, :app, :db], primary: false
 
 set :branch, :production
