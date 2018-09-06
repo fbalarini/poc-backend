@@ -122,9 +122,6 @@ jobs:
           name: Bundle Install
           command: bundle check || bundle install
 
-    steps:
-      - checkout
-
       - run:
           name: Deploy Production to AWS
           command: |
